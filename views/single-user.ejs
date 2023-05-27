@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single User</title>
+</head>
+<body>
+    <%= user.userName  %>
+    <%= user.age  %>
+    <%= user.gender  %>
+    <a href = '/all-users'>Back to All Users</a>
+    <a class= "delete" data-doc = "<%= user._id  %>">Delete User</a>
+</body>
+</html>
+
+<script>
+    const trash = document.querySelector('a.delete');
+
+    //fetch basically communicates with the server, in this case we are calling a Delete method which is called by the server
+    //in this case, we are trigger a DELETE fetch when the Delete user anchor is clicked, and it gets handled by the server which deletes the user. 
+    //the server then returns a response of a redirect json to the fetch as response, which is converted to a jsobject called data using .json
+    trash.addEventListener('click', (e) => {
+        const endpoint = `/all-users/<%= user._id %>`
+        console.log(endpoint);
+        fetch(`/all-users/<%= user._id %>`, {
+            method: 'DELETE'
+        })
+            .then((response) => response.json()
+            .then((data) => window.location.href=data.redirect)
+            ).catch(err => console.log(err))
+    })
+</script>
