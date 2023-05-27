@@ -9,7 +9,7 @@ const app = express();
 //connect to mongoDB
 //mongoose is an ODM library to communicate with the DB
 //only start listening after db connects
-const dbURI = 'mongodb+srv://tayjiunyuan:bobo@nodejscrashcourse.murrry4.mongodb.net/?retryWrites=true&w=majority'
+const dbURI = 'mongodb+srv://tayjiunyuan:<password>@nodejscrashcourse.murrry4.mongodb.net/?retryWrites=true&w=majority'
 mongoose.connect(dbURI)
     .then((result) => app.listen(3000))
     .catch((err) => console.log(error));
